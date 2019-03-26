@@ -1,0 +1,69 @@
+package com.fullStack.user.service.impl;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.fullStack.media.dao.MediaDao;
+import com.fullStack.media.model.Media;
+import com.fullStack.media.model.MediaDto;
+import com.fullStack.media.service.MediaService;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+
+@Service(value = "userService")
+public class UserServiceImpl implements UserDetailsService, MediaService {
+	
+	@Autowired
+	private MediaDao userDao;
+
+	@Autowired
+	private BCryptPasswordEncoder bcryptEncoder;
+
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		//Media user = userDao.findByUsername(username);
+		//if(user == null){
+		//	throw new UsernameNotFoundException("Invalid username or password.");
+		//}
+		return null;//new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+	}
+
+	private List<SimpleGrantedAuthority> getAuthority() {
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+	}
+
+	@Override
+	public Media findOne(String media) {
+		return null;
+	}
+
+    @Override
+    public MediaDto update(MediaDto userDto) {
+        Media user = findOne(userDto.getUsername());
+        if(user != null) {
+            BeanUtils.copyProperties(userDto, user, "password");
+            userDao.save(user);
+        }
+        return userDto;
+    }
+
+    @Override
+    public Media save(MediaDto user) {
+	    Media newUser = new Media();
+	    newUser.setUsername(user.getUsername());
+	    newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+	    newUser.setEmail(user.getEmail());
+        return userDao.save(newUser);
+    }
+}

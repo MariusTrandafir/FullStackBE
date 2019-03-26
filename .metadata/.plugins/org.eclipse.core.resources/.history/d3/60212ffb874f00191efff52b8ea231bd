@@ -1,0 +1,24 @@
+file:
+  upload-dir: ./uploads
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka
+server:
+  port: 9081
+spring:
+  application:
+    name: userMS
+  datasource:
+    password: FullStack
+    url: jdbc:mysql://localhost:3306/fullStack?useSSL=false
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  user:
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver

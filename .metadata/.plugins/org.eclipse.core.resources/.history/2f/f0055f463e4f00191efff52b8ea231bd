@@ -1,0 +1,113 @@
+package com.fullStack.user.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Date;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String username;
+    @Column
+    @JsonIgnore
+    private String password;
+    @Column
+    private String email;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getLinkedin_url() {
+		return linkedin_url;
+	}
+
+	public void setLinkedin_url(String linkedin_url) {
+		this.linkedin_url = linkedin_url;
+	}
+
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getReg_dateTime() {
+		return reg_dateTime;
+	}
+
+	public void setReg_dateTime(Date reg_dateTime) {
+		this.reg_dateTime = reg_dateTime;
+	}
+
+	public String getReg_code() {
+		return reg_code;
+	}
+
+	public void setReg_code(String reg_code) {
+		this.reg_code = reg_code;
+	}
+
+	public boolean isIs_active() {
+		return is_active;
+	}
+
+	public void setIs_active(boolean is_active) {
+		this.is_active = is_active;
+	}
+
+	public boolean isIs_blocked() {
+		return is_blocked;
+	}
+
+	public void setIs_blocked(boolean is_blocked) {
+		this.is_blocked = is_blocked;
+	}
+
+}

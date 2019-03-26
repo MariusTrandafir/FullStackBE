@@ -1,0 +1,4 @@
+zuul.routes.user.service-id=USERMS
+zuul.routes.media.service-id=MEDIAMS
+eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka
+server.port=8079

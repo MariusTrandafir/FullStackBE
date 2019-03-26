@@ -1,0 +1,5 @@
+package com.fullStack.media.model;
+
+public class MediaFileResponse {
+
+}

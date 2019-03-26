@@ -1,0 +1,56 @@
+package com.fullStack.media.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.*;
+
+import com.fullStack.media.config.JwtTokenUtil;
+import com.fullStack.media.model.ApiResponse;
+import com.fullStack.media.model.AuthToken;
+import com.fullStack.media.model.Media;
+import com.fullStack.media.model.MediaDto;
+import com.fullStack.user.service.MediaService;
+
+import java.util.List;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/media")
+public class MediaController {
+
+    @Autowired
+    private MediaService userService;
+    
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public ApiResponse<AuthToken> auth(@RequestBody Media loginUser) throws AuthenticationException {
+    	authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
+        final Media user = userService.findOne(loginUser.getUsername());
+        final String token = jwtTokenUtil.generateToken(user);
+        return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
+    }
+    
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ApiResponse<Media> signup(@RequestBody MediaDto user){
+    	return new ApiResponse<>(HttpStatus.OK.value(),"User sign up succesfull.",userService.save(user));
+    }
+    
+//    @RequestMapping(value = "/resendConfirmationEmail/{username}", method = RequestMethod.GET)
+//    public ApiResponse<User> confirm(@PathVariable("reg_code") String reg_code){
+//    	return new ApiResponse<>(HttpStatus.OK.value(),"User confirmation succesfull.",userService.confirm(reg_code, username));
+//    }
+    
+//  @RequestMapping(value = "/resetPassword/{username}", method = RequestMethod.GET)
+//  public ApiResponse<User> confirm(@PathVariable("reg_code") String reg_code){
+//  	return new ApiResponse<>(HttpStatus.OK.value(),"User confirmation succesfull.",userService.confirm(reg_code, username));
+//  }
+    
+}

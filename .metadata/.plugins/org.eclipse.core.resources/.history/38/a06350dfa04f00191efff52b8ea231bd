@@ -1,0 +1,10 @@
+package com.fullStack.media.model;
+
+public class MediaFileResponse {
+    private String fileName;
+    private String fileDownloadUri;
+    private String username;
+    private String description;
+    private String title;
+    private String tags;
+}

@@ -1,0 +1,15 @@
+package com.fullStack.user.service;
+
+import java.util.List;
+
+import com.fullStack.user.model.Media;
+import com.fullStack.user.model.UserDto;
+
+public interface MediaService {
+
+    Media save(UserDto user);
+
+    Media findOne(String username);
+
+    UserDto update(UserDto userDto);
+}

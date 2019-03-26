@@ -1,0 +1,20 @@
+1553557497175	Rename package 'com.fullStack.user'
+1553557514793	Rename type 'ApplicationUserMS'
+1553557539219	Rename package 'com.fullStack.user.config'
+1553557556024	Rename package 'com.fullStack.user.controller'
+1553557572646	Rename package 'com.fullStack.user.dao'
+1553557586299	Rename type 'UserController'
+1553557858213	Rename type 'UserDao'
+1553557990894	Rename type 'UserService'
+1553558004542	Rename type 'User'
+1553558173554	Rename type 'UserDto'
+1553558180705	Delete element
+1553558205688	Rename package 'com.fullStack.user.model'
+1553558429720	Delete element
+1553576201392	Rename package 'com.fullStack.user.service'
+1553576232470	Rename package 'com.fullStack.user.service.impl'
+1553577054378	Rename type 'FileStorageServiceImpl'
+1553577712613	Delete element
+1553577755450	Rename local variable 'fie'
+1553577787425	Rename field 'repository'
+1553588859232	Rename field 'fileStorageService'

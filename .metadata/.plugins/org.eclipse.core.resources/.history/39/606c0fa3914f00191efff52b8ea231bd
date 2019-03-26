@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: abcdef
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  user:
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver

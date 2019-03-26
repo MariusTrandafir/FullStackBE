@@ -1,0 +1,12 @@
+package com.fullStack.media.dao;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.fullStack.user.model.Media;
+
+@Repository
+public interface MediaDao extends CrudRepository<Media, Integer> {
+
+    Media findByUsername(String username);
+}

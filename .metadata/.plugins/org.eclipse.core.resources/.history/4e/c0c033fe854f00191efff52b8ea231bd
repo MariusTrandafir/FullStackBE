@@ -1,0 +1,10 @@
+package com.fullStack.media.service;
+
+import java.util.List;
+
+import com.fullStack.media.model.Media;
+import com.fullStack.media.model.MediaDto;
+
+public interface MediaService {
+
+}

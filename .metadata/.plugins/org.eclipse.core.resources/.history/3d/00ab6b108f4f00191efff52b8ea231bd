@@ -1,0 +1,14 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka
+server:
+  port: 8079
+zuul:
+  routes:
+    media:
+      sensitive-headers:
+      service-id: MEDIAMS
+    user:
+      sensitive-headers:
+      service-id: USERMS
