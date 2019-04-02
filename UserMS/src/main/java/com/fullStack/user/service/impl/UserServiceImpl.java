@@ -46,13 +46,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	@Override
 	public User findOne(String username) {
 		return userDao.findByUsername(username);
+		
 	}
 
     @Override
     public UserDto update(UserDto userDto) {
-        User user = findOne(userDto.getUsername());
+        User user = userDao.findById(Integer.valueOf(userDto.getId())).get();
         if(user != null) {
-            BeanUtils.copyProperties(userDto, user, "id");
+            BeanUtils.copyProperties(userDto, user, "id","password");
+            if (userDto.getPassword() != null && !userDto.getPassword().isEmpty())
+            	user.setPassword(bcryptEncoder.encode(userDto.getPassword()));
             userDao.save(user);
         }
         return userDto;

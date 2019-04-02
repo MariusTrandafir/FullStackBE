@@ -37,8 +37,8 @@ public class MediaController {
     private MediaService mediaService;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("title") String title,@RequestParam("description") String description,@RequestParam("tags") String tags,@RequestParam("username") String username) {
-        String fileName = mediaService.storeFile(file,title,description,username,tags);
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("title") String title,@RequestParam("description") String description,@RequestParam("tags") String tags,@RequestParam("username") String username,@RequestParam("likes") String likes) {
+        String fileName = mediaService.storeFile(file,title,description,username,tags,Integer.valueOf(likes));
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("media/downloadFile/")
@@ -76,6 +76,11 @@ public class MediaController {
     @GetMapping("/myImages/{username}")
     public List<MediaFileResponse> myImages(@PathVariable String username) {
         return mediaService.getMyImages(username);
+    }
+    
+    @GetMapping("/search/{search}")
+    public List<MediaFileResponse> searchImages(@PathVariable String search) {
+        return mediaService.searchImages(search);
     }
     
     

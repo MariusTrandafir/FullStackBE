@@ -34,7 +34,7 @@ public class UserController {
     	authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
         final User user = userService.findOne(loginUser.getUsername());
         final String token = jwtTokenUtil.generateToken(user);
-        return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
+        return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername(), user.getEmail(), Integer.toString(user.getId())));
     }
     
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -45,6 +45,11 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ApiResponse<UserDto> update(@RequestBody UserDto userDto) {
         return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userDto));
+    }
+    
+    @GetMapping("/checkusername/{username}")
+    public boolean checkusername(@PathVariable String username) {
+        return !(userService.findOne(username) == null);
     }
     
 }

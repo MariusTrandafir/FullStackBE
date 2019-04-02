@@ -11,8 +11,9 @@ import com.fullStack.media.model.MediaFileResponse;
 
 public interface MediaService {
 
-	String storeFile(MultipartFile file, String title, String description, String username, String tags);
+	String storeFile(MultipartFile file, String title, String description, String username, String tags, int likes);
 	Resource loadFileAsResource(String fileName);
 	MediaFileResponse getProfileImage(String username);
 	List<MediaFileResponse> getMyImages(String username);
+	List<MediaFileResponse> searchImages(String search);
 }

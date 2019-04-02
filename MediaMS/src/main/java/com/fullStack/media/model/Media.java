@@ -36,10 +36,13 @@ public class Media {
 	@Column(name = "profile")
 	private boolean profile;
 
+	@Column(name = "likes")
+	private int likes;
+	
 	public Media() {
 	}
 
-	public Media(String username, String filename, String url, String description, String title, String tags) {
+	public Media(String username, String filename, String url, String description, String title, String tags, int likes) {
 		this.username = username;
 		this.filename = filename;
 		this.url = url;
@@ -47,6 +50,7 @@ public class Media {
 		this.title = title;
 		this.profile = profile;
 		this.tags = tags;
+		this.likes = likes;
 	}
 
 
@@ -113,6 +117,14 @@ public class Media {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 	

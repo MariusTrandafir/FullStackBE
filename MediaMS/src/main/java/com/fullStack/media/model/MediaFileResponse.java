@@ -7,15 +7,17 @@ public class MediaFileResponse {
     private String description;
     private String title;
     private String tags;
+    private int likes;
     
 	public MediaFileResponse(String fileName, String fileDownloadUri, String username, String description, String title,
-			String tags) {
+			String tags,int likes) {
 		this.fileName = fileName;
 		this.fileDownloadUri = fileDownloadUri;
 		this.username = username;
 		this.description = description;
 		this.title = title;
 		this.tags = tags;
+		this.likes = likes;
 	}
 
 	public String getFileName() {
@@ -64,6 +66,14 @@ public class MediaFileResponse {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 	

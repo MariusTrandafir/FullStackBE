@@ -9,7 +9,7 @@ spring:
     name: userMS
   datasource:
     password: FullStack
-    url: jdbc:mysql://localhost:3306/fullStack?useSSL=false
+    url: jdbc:mysql://localhost:3306/fullStack?allowPublicKeyRetrieval=true&useSSL=false
     username: root
   jpa:
     hibernate:

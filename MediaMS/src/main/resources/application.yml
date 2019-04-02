@@ -11,10 +11,11 @@ spring:
     name: mediaMS
   datasource:
     password: FullStack
-    url: jdbc:mysql://localhost:3306/fullStack?useSSL=false
+    url: jdbc:mysql://localhost:3306/fullStack?allowPublicKeyRetrieval=true&useSSL=false
     username: root
   jpa:
     hibernate:
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true

@@ -44,7 +44,7 @@ public class MediaServiceImpl implements MediaService{
         }
     }
 
-    public String storeFile(MultipartFile file, String title, String description, String username, String tags) {
+    public String storeFile(MultipartFile file, String title, String description, String username, String tags, int likes) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -53,7 +53,7 @@ public class MediaServiceImpl implements MediaService{
             }
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-            Media media = new Media(username, fileName, "/media/downloadFile/"+fileName, description, title, tags);
+            Media media = new Media(username, fileName, "/media/downloadFile/"+fileName, description, title, tags,likes);
             if (mediaDao.findByUsernameAndProfile(username, true)==null) {
             	media.setProfile(true);
             }
@@ -85,7 +85,7 @@ public class MediaServiceImpl implements MediaService{
 	public MediaFileResponse getProfileImage(String username) {
 		Media media = mediaDao.findByUsernameAndProfile(username, true);
 		if (media!=null)
-		return new MediaFileResponse (media.getFilename(), media.getUrl(), media.getUsername(), media.getDescription(), media.getTitle(), media.getTags());
+		return new MediaFileResponse (media.getFilename(), media.getUrl(), media.getUsername(), media.getDescription(), media.getTitle(), media.getTags(), media.getLikes());
 		return null;
 	}
 
@@ -95,7 +95,21 @@ public class MediaServiceImpl implements MediaService{
 		System.out.println(results.toString());
 		List<MediaFileResponse> response = new ArrayList<MediaFileResponse>();
 		for (Media media: results) {
-			response.add(new MediaFileResponse (media.getFilename(), media.getUrl(), media.getUsername(), media.getDescription(), media.getTitle(), media.getTags()));
+			response.add(new MediaFileResponse (media.getFilename(), media.getUrl(), media.getUsername(), media.getDescription(), media.getTitle(), media.getTags(), media.getLikes()));
+		}
+		return response;
+	}
+	
+	@Override
+	public List<MediaFileResponse> searchImages(String search) {
+		String[] searchStrings = search.split(",");
+		List<MediaFileResponse> response = new ArrayList<MediaFileResponse>();
+		for (String searchString: searchStrings) {
+		Iterable<Media> results =  mediaDao.searchMedia(search);
+		System.out.println(results.toString());
+		for (Media media: results) {
+			response.add(new MediaFileResponse (media.getFilename(), media.getUrl(), media.getUsername(), media.getDescription(), media.getTitle(), media.getTags(), media.getLikes()));
+		}
 		}
 		return response;
 	}
